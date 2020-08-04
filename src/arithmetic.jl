@@ -1,6 +1,5 @@
-
 function (+)(x::SimpleQuaternion, y::SimpleQuaternion)
-    cz = _coeffs(x) .+ _coeffs(y)
+    cz = parts(x) .+ parts(y)
     return SimpleQuaternion(cz...)
 end 
 
@@ -9,12 +8,12 @@ end
 
 
 function (-)(x::SimpleQuaternion)
-    cz = (-)._coeffs(x)
-    return SimpleQuaternion(cz...)
+    a,b,c,d = parts(x)
+    return SimpleQuaternion(-a,-b,-c,-d)
 end 
 
 function (-)(x::SimpleQuaternion,y::SimpleQuaternion)
-    cz = _coeffs(x) .- _coeffs(y)
+    cz = parts(x) .- parts(y)
     return SimpleQuaternion(cz...)
 end 
 
@@ -22,8 +21,8 @@ end
 (-)(x::Number, y::SimpleQuaternion) = SimpleQuaternion(x) - y 
 
 function (*)(x::SimpleQuaternion, y::SimpleQuaternion)
-    a,b,c,d = _coeffs(x)
-    aa,bb,cc,dd, = _coeffs(y)
+    a,b,c,d = parts(x)
+    aa,bb,cc,dd, = parts(y)
 
     w = a*aa - b*bb - c*cc - d*dd
     x = a*bb + b*aa + c*dd - d*cc
@@ -38,16 +37,26 @@ end
 
 
 function norm(x::SimpleQuaternion)
-    a,b,c,d = _coeffs(x)
+    a,b,c,d = parts(x)
     return sqrt(a*a + b*b + c*c + d*d)
 end
 
 function (inv)(x::SimpleQuaternion)
-    a,b,c,d = _coeffs(x)
+    a,b,c,d = parts(x)
     n = a*a + b*b + c*c + d*d
     return SimpleQuaternion(a/n, -b/n, -c/n, -d/n)
+end
+
+function (_inv)(x::SimpleQuaternion)
+    a,b,c,d = parts(x)
+    n = a*a + b*b + c*c + d*d
+    return SimpleQuaternion(a//n, -b//n, -c//n, -d//n)
 end
 
 (/)(x::SimpleQuaternion, y::SimpleQuaternion) =  x * inv(y)
 (/)(x::SimpleQuaternion,y::Number) =  x * inv(y)
 (/)(x::Number,y::SimpleQuaternion) =  x * inv(y)
+
+(//)(x::SimpleQuaternion, y::SimpleQuaternion) = x * _inv(y)
+(//)(x::SimpleQuaternion, y::Number) = x * (1//y)
+(//)(x::Number,y::SimpleQuaternion) = SimpleQuaternion(x) // y
