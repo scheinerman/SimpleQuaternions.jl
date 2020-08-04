@@ -4,7 +4,7 @@ using LinearAlgebra
 
 export SimpleQuaternion, jm, km, parts
 
-import Base: (+), (-), (*), (/), (//), (==), inv, string, show
+import Base: (+), (-), (*), (/), (//), (==), inv, string, show, adjoint, real
 import LinearAlgebra: norm
 export norm
 
@@ -32,6 +32,8 @@ km = SimpleQuaternion(false,false,false,true)
 function (==)(x::SimpleQuaternion,y::SimpleQuaternion)
     parts(x) == parts(y)
 end
+
+real(x::SimpleQuaternion) = x.a
 
 (==)(x::SimpleQuaternion, y::Number) = x == SimpleQuaternion(y)
 (==)(x::Number, y::SimpleQuaternion) = SimpleQuaternion(x) == y

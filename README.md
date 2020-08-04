@@ -29,6 +29,12 @@ julia> a = 3im-4 + km
 julia> parts(a)
 (-4, 3, 0, 1)
 
+julia> real(a)
+-4
+
+julia> a'
+-4 - 3im + 0jm - 1km
+
 julia> b = 1 - 4im + jm
 1 - 4im + 1jm + 0km
 

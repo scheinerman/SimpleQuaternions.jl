@@ -13,5 +13,5 @@ a = SimpleQuaternion(1,1,1,1)
 @test a*a == SimpleQuaternion(-2,2,2,2)
 @test parts(a) == (1,1,1,1)
 @test a//a == 1
-
+@test sqrt(real(a*a')) == norm(a)
 

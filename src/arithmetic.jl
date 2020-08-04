@@ -60,3 +60,9 @@ end
 (//)(x::SimpleQuaternion, y::SimpleQuaternion) = x * _inv(y)
 (//)(x::SimpleQuaternion, y::Number) = x * (1//y)
 (//)(x::Number,y::SimpleQuaternion) = SimpleQuaternion(x) // y
+
+
+function adjoint(x::SimpleQuaternion)
+    a,b,c,d = parts(x)
+    return SimpleQuaternion(a,-b,-c,-d)
+end 
