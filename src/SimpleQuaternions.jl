@@ -16,16 +16,19 @@ struct SimpleQuaternion{T}  <: Number
     end 
 end
 
+_coeffs(x::SimpleQuaternion) = (x.a,x.b,x.c,x.d)
+
 SimpleQuaternion(x::Real) = SimpleQuaternion(x,0,0,0)
 SimpleQuaternion(z::Complex) = SimpleQuaternion(real(z),imag(z),0,0)
 
-jm = SimpleQuaternion(0,0,1,0)
-km = SimpleQuaternion(0,0,0,1)
+jm = SimpleQuaternion(false,false,true,false)
+km = SimpleQuaternion(false,false,false,true)
 
 function (==)(x::SimpleQuaternion,y::SimpleQuaternion)
-    x.a==y.a && x.b==y.b && x.c==y.c && x.d==y.d
+    _coeffs(x) == _coeffs(y)
 end
 
 include("promotion.jl")
+include("arithmetic.jl")
 
 end # module
