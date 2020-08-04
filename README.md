@@ -19,7 +19,7 @@ This module provides the `SimpleQuaternion` type. To create the quaternion
 
 Note that `im` is the usual Julia representation for *i*; this module adds `jm` 
 and `km`. Thus, the expression `1+im` yields a `Complex` value, but `1+jm` yields 
-`SimpleQuaternion`.
+a `SimpleQuaternion`.
 
 Some examples:
 ```
