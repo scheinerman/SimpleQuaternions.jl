@@ -2,3 +2,6 @@ name = "SimpleQuaternions"
 uuid = "3a9c7681-b7ab-4d38-9bb7-f7834a016733"
 authors = ["Ed Scheinerman <ers@jhu.edu>"]
 version = "0.0.0"
+
+[deps]
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"

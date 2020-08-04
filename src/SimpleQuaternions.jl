@@ -1,8 +1,13 @@
 module SimpleQuaternions
 
+using LinearAlgebra
+
 export SimpleQuaternion, jm, km, coeffs
 
-import Base: (+), (-), (*), (/), (==)
+import Base: (+), (-), (*), (/), (==), inv
+import LinearAlgebra: norm
+export norm
+
 
 struct SimpleQuaternion{T}  <: Number
     a::T 
@@ -28,7 +33,10 @@ function (==)(x::SimpleQuaternion,y::SimpleQuaternion)
     _coeffs(x) == _coeffs(y)
 end
 
-include("promotion.jl")
+(==)(x::SimpleQuaternion, y::Number) = x == SimpleQuaternion(y)
+(==)(x::Number, y::SimpleQuaternion) = SimpleQuaternion(x) == y
+
+# include("promotion.jl")
 include("arithmetic.jl")
 
 end # module
