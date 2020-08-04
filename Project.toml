@@ -1,4 +1,4 @@
 name = "SimpleQuaternions"
 uuid = "3a9c7681-b7ab-4d38-9bb7-f7834a016733"
 authors = ["Ed Scheinerman <ers@jhu.edu>"]
-version = "0.1.0"
+version = "0.0.0"
