@@ -36,7 +36,6 @@ end
 (==)(x::SimpleQuaternion, y::Number) = x == SimpleQuaternion(y)
 (==)(x::Number, y::SimpleQuaternion) = SimpleQuaternion(x) == y
 
-# include("promotion.jl")
 include("arithmetic.jl")
 include("show.jl")
 
