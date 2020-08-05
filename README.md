@@ -11,7 +11,7 @@
 The *quaternions* are an extension to the real (and complex) numbers. See
 [this article](https://en.wikipedia.org/wiki/Quaternion).
 
----
+## Fundamentals
 
 This module provides the `SimpleQuaternion` type. To create the quaternion 
 *a + bi + cj + dk* use `SimpleQuaternion(a,b,c,d)` or, alternatively
@@ -22,17 +22,20 @@ and `km`. Thus, the expression `1+im` yields a `Complex` value, but `1+jm` yield
 a `SimpleQuaternion`.
 
 Some examples:
-```
-julia> a = 3im-4 + km
+```julia
+julia> a = 3im - 4 + km
 -4 + 3im + 0jm + 1km
 
-julia> parts(a)
+julia> get_parts(a)
 (-4, 3, 0, 1)
 
-julia> real(a)
+julia> real(a)   # Return the real part of a
 -4
 
-julia> a'
+julia> isreal(a)
+false
+
+julia> a'        # return the conjugate of a
 -4 - 3im + 0jm - 1km
 
 julia> b = 1 - 4im + jm
@@ -68,3 +71,63 @@ true
 julia> im*im == jm*jm == km*km == -1
 true
 ```
+
+## Matrix representation
+
+Quaternions can be represented by 4-by-4 real matrices or by 2-by-2 complex matrices. 
+The functions `real_matrix` and `complex_matrix` produce these.
+```
+julia> a = 3im-4 + km
+-4 + 3im + 0jm + 1km
+
+julia> isreal(a)
+false
+
+julia> a = 3im-4 + km^C
+
+julia> a = 3im - 4 + km
+-4 + 3im + 0jm + 1km
+
+julia> get_parts(a)
+(-4, 3, 0, 1)
+
+julia> b = SimpleQuaternion(-8,0,2,6)^C
+
+julia> b = 1 - 4im + jm
+1 - 4im + 1jm + 0km
+
+julia> a = 3im - 4 + km
+-4 + 3im + 0jm + 1km
+
+julia> b = 1 - 4im + jm
+1 - 4im + 1jm + 0km
+
+julia> A = real_matrix(a); B = real_matrix(b)
+4×4 Array{Int64,2}:
+  1   4  -1  0
+ -4   1   0  1
+  1   0   1  4
+  0  -1  -4  1
+
+julia> A*B == real_matrix(a*b)
+true
+
+julia> A = complex_matrix(a); B = complex_matrix(b)
+2×2 Array{Complex{Int64},2}:
+  1-4im  1+0im
+ -1+0im  1+4im
+
+julia> A*B == complex_matrix(a*b)
+true
+```
+
+## Random quaternions 
+
+Use `rand(SimpleQuaternion)` to yield a random quaternion each of whose 
+four components is a uniform [0,1] random value.
+
+Use `randn(SimpleQuaternion)` to yield a random quaternion each of whose
+four components is a standard normal random value. 
+
+
+

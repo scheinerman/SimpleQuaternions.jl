@@ -1,5 +1,5 @@
 function string(x::SimpleQuaternion)
-    a,b,c,d = parts(x)
+    a,b,c,d = get_parts(x)
     (a,b,c,d,xx) = promote(a,b,c,d,0)
     result = string(a)
 
