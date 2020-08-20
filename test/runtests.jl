@@ -20,9 +20,13 @@ b = SimpleQuaternion(5,0,-2,4)
 A = real_matrix(a)
 B = real_matrix(b)
 @test a == SimpleQuaternion(A)
+@test a' == SimpleQuaternion(A')
+
+
 @test A*B == real_matrix(a*b)
 
 A = complex_matrix(a)
 B = complex_matrix(b)
 @test A*B == complex_matrix(a*b)
 @test b == SimpleQuaternion(B)
+@test b' == SimpleQuaternion(B')

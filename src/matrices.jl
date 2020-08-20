@@ -29,7 +29,7 @@ function complex_matrix(x::SimpleQuaternion)
 end
 
 
-function SimpleQuaternion(A::Matrix{T}) where T
+function SimpleQuaternion(A::AbstractMatrix{T}) where T
     r,c = size(A)
     if r!=c || !in(r,[2,4])
         error("Matrix must be 2-by-2 or 4-by-4; got $r-by-$c.")
